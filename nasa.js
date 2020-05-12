@@ -1,6 +1,5 @@
-const baseUrl = "https://eonet.sci.gsfc.nasa.gov/api/v3/events?limit=50";
+const baseUrl = "https://eonet.sci.gsfc.nasa.gov/api/v3/events?_limit=10";
 const key = "W3ic4GJkvIT9VcudyjfjIJ2hjquaAqDyOdTKwYxy";
-
 let url;
 
 const searchDate = document.querySelector(".date");
@@ -12,11 +11,13 @@ const nav = document.querySelector("nav");
 const section = document.querySelector("section");
 
 nav.style.display = "none";
-let displayav = false;
+let displanav = false;
+let pageNumber = 0;
+console.log("PageNumber".pageNumber);
 
 searchForm.addEventListener("submit", fetchResults);
-// searchForm.addEventListener("click", nextPage);
-// searchForm.addEventListener("click", previousPage);
+searchForm.addEventListener("click", nextPage);
+searchForm.addEventListener("click", previousPage);
 
 function fetchResults(e) {
   console.log(e);
@@ -43,16 +44,18 @@ function fetchResults(e) {
 function displayResults(json) {
   while (section.firstChild) [section.removeChild(section.firstChild)];
 
-  //   let nasa = json.response.docs;
+  let nasa = json.events;
+  console.log(nasa);
 
   if (nasa.length === 0) {
     console.log("No Results");
   } else {
     for (let n = 0; n < nasa.length; n++) {
-      let article = document.createElement("article");
-      let heading = document.createElement("h2");
+      let id = document.createElement("h1");
+      let title = document.createElement("h2");
       let link = document.createElement("a");
-      let para = document.createElement("p");
+      let geometry = document.createElement("div");
+      let date = document.createElement("p");
       let clearfix = document.createElement("div");
 
       let current = nasa[n];
@@ -60,17 +63,24 @@ function displayResults(json) {
 
       link.href = current.web_url;
       console.log(link);
-      link.textContent = current.headline.main;
+      link.textContent = current.link;
 
-      para.textContent = "Keywords: ";
+      id.textContent = "Title: ";
 
-      for (let i = 0; i < current.keywords.length; i++) {
+      for (let i = 0; i < current.title.length; i++) {
         let span = document.createElement("span");
-        span.textContent += current.keywords[i].value + " ";
-        para.appendChild(span);
+        span.textContent += current.title[i] + "";
+        id.appendChild(span);
       }
 
       clearfix.setAttribute("class", "clearfix");
+
+      id.appendChild(title);
+      title.appendChild(link);
+      id.appendChild(geometry);
+      id.appendChild(date);
+      id.appendChild(clearfix);
+      section.appendChild(id);
     }
   }
 
@@ -79,4 +89,21 @@ function displayResults(json) {
   } else {
     nav.style.display = "none";
   }
+}
+
+function nextPage(e) {
+  pageNumber++;
+  fetchResults(e);
+  console.log("Page Number:", pageNumber);
+}
+
+function previousPage(e) {
+  if (pageNumber > 0) {
+    pageNumber--;
+    fetchResults(e);
+  } else {
+    return;
+  }
+  fetchResults(e);
+  console.log("Page:", pageNumber);
 }
