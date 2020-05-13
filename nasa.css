@@ -47,10 +47,11 @@ nav {
 }
 
 article {
+  font-size: 20px;
   padding: 10px;
   margin-bottom: 20px;
-  background-color: #ddd;
-  border: 1px solid #ccc;
+  /* background-color: ; */
+  /* border: 1px solid #ccc; */
 }
 
 article p {
