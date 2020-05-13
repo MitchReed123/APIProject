@@ -27,7 +27,7 @@ function fetchResults(e) {
   //   console.log(e);
   console.log(pageNumber);
   e.preventDefault();
-  url = `${baseUrl}?api-key=${key}&page=${pageNumber}`;
+  url = `${baseUrl}?api-key=${key}&page=${pageNumber}?&limit=15`;
   console.log("URL:", url);
 
   if (startDate.value !== "") {
