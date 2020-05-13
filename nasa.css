@@ -1,7 +1,7 @@
 body {
   /* background-image: url(assets/background.jpg);
   background-repeat: no-repeat; */
-  background-color: black;
+  background-color: skyblue;
   font-family: sans-serif;
 }
 
@@ -22,7 +22,7 @@ form p:nth-of-type(1) {
 }
 
 h1 {
-  color: white;
+  color: black;
   text-align: cemter;
 }
 
@@ -52,6 +52,16 @@ article {
   background-color: #ddd;
   border: 1px solid #ccc;
 }
+
+article p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+article p:nth-of-type(2) {
+  font-size: 14px;
+  line-height: 2;
+}
 .clearfix {
   clear: both;
 }
@@ -67,20 +77,20 @@ article {
 }
 
 a {
-  color: red;
+  color: green;
   text-decoration: none;
 }
 
 .date {
-  color: white;
+  color: black;
 }
 
 .controls {
-  border: 3px solid white;
+  border: 3px solid black;
   border-radius: 15px;
 }
 
 .info {
-  border: 3px solid white;
+  border: 3px solid black;
   border-radius: 15px;
 }

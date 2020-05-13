@@ -1,4 +1,4 @@
-const baseUrl = "https://eonet.sci.gsfc.nasa.gov/api/v3/events?_limit=10";
+const baseUrl = "https://eonet.sci.gsfc.nasa.gov/api/v3/events?";
 const key = "W3ic4GJkvIT9VcudyjfjIJ2hjquaAqDyOdTKwYxy";
 let url;
 
@@ -11,18 +11,19 @@ const nav = document.querySelector("nav");
 const section = document.querySelector("section");
 
 nav.style.display = "none";
-let displanav = false;
+
 let pageNumber = 0;
-console.log("PageNumber".pageNumber);
+let displanav = false;
+console.log("PageNumber", pageNumber);
 
 searchForm.addEventListener("submit", fetchResults);
-searchForm.addEventListener("click", nextPage);
-searchForm.addEventListener("click", previousPage);
+nextBtn.addEventListener("click", nextPage);
+prevBtn.addEventListener("click", previousPage);
 
 function fetchResults(e) {
   console.log(e);
   e.preventDefault();
-  url = `${baseUrl}?api-key=${key}&q=${searchDate.value}`;
+  url = `${baseUrl}?api-key=${key}&page=${pageNumber}&q=${searchDate.value}limit=15`;
   console.log("URL:", url);
 
   if (searchDate.value !== " ") {
@@ -61,7 +62,7 @@ function displayResults(json) {
       let current = nasa[n];
       console.log("Current:", current);
 
-      link.href = current.web_url;
+      link.href = current.link;
       console.log(link);
       link.textContent = current.link;
 
